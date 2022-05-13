@@ -27,21 +27,20 @@ class MainActivity : AppCompatActivity() {
             likes = 999,
             share = 999999
         )
+
         binding.render(post)
         var likeCount = binding.likeCount
-        var count = post.likes
         binding.likes.setOnClickListener {
             post.likedByMe = !post.likedByMe
-            if(post.likedByMe) count++ else count--
-            likeCount.text = formatEnds(count)
+            if(post.likedByMe) post.likes++ else post.likes--
+            likeCount.text = formatEnds(post.likes)
             binding.likes.setImageResource(getLikeIconResId(post.likedByMe))
 
         }
         var viewShareCount = binding.shareCount
-        var shareCount = post.share
         binding.share.setOnClickListener {
-            shareCount++
-            viewShareCount.text = formatEnds(shareCount)
+            post.share++
+            viewShareCount.text = formatEnds(post.share)
             binding.share.setImageResource(R.drawable.ic_share_24dp)
         }
     }
