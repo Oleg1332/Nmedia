@@ -3,12 +3,17 @@ package ru.netology.nmedia
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatTextView
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.viewModel.PostViewModel
+
 const val THOUSAND = 1000.0
 const val MILLION = 1000000.0
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +24,24 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
-            id = 0L,
-            author = "Oleg",
-            content = "Events",
-            published = "11.05.2022",
-            likes = 999,
-            share = 999999
-        )
+      viewModel.data.observe(this) { post ->
+          binding.render(post)
+      }
 
-        binding.render(post)
-        var likeCount = binding.likeCount
+
+        //var likeCount = binding.likeCount
         binding.likes.setOnClickListener {
-            post.likedByMe = !post.likedByMe
-            if(post.likedByMe) post.likes++ else post.likes--
-            likeCount.text = formatEnds(post.likes)
-            binding.likes.setImageResource(getLikeIconResId(post.likedByMe))
+            viewModel.onLikeClicked()
+//            likeCount.text = formatEnds(post.likes)
+//            binding.likes.setImageResource(getLikeIconResId(post.likedByMe))
 
         }
-        var viewShareCount = binding.shareCount
+        //var viewShareCount = binding.shareCount
         binding.share.setOnClickListener {
-            post.share++
-            viewShareCount.text = formatEnds(post.share)
-            binding.share.setImageResource(R.drawable.ic_share_24dp)
+            viewModel.onShareClicked()
+//            post.share++
+//            viewShareCount.text = formatEnds(post.share)
+//            binding.share.setImageResource(R.drawable.ic_share_24dp)
         }
     }
 
