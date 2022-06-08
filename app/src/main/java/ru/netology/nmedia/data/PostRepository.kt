@@ -8,7 +8,5 @@ interface PostRepository {
 
     fun like()
 
-    fun formatEnds(shareCount: Int): String
-
     fun share()
 }
