@@ -33,10 +33,10 @@ class InMemoryPostRepository : PostRepository {
 
 
     override fun share(postId: Long) {
-        data.value = posts.map { it ->
+        data.value = posts.map {
             if (it.id != postId) it
-            else it.copy()
-                .also { it.share + 10 }
+            else it.copy(share = it.share)
+                .also { post -> post.share++ }
         }
 
 }
