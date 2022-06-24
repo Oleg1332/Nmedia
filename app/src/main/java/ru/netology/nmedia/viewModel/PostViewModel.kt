@@ -30,6 +30,11 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     }
 
 // region PostInteractionListener
+
+    fun onCancelButtonClicked() {
+        currentPost.value = null
+    }
+
     override fun onLikeClicked(post: Post) =
         repository.like(post.id)
 

@@ -10,4 +10,6 @@
     <string name="post_text">Post Text</string>
     <string name="menu_edit">Edit</string>
     <string name="error_empty_content">Content can\'t be empty</string>
+    <string name="editing_post">Editing</string>
+    <string name="cancel">cancel</string>
 </resources>

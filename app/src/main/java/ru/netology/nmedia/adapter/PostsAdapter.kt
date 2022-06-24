@@ -58,19 +58,23 @@ internal class PostsAdapter(
         init {
             binding.likes.setOnClickListener { listener.onLikeClicked(post) }
             binding.share.setOnClickListener { listener.onShareClicked(post) }
+            //binding.options.setOnClickListener { popupMenu.show() }
         }
 
-        fun bind(post: Post) = with(binding) {
-            authorName.text = post.author
-            postText.text = post.content
-            date.text = post.published
-            likeCount.text = formatEnds(post.likes)
-            shareCount.text = formatEnds(post.share)
-            likes.setImageResource(getLikeIconResId(post.likedByMe))
-            likes.setOnClickListener { interactionListener.onLikeClicked(post) }
-            share.setOnClickListener { interactionListener.onShareClicked(post) }
-            options.setOnClickListener { popupMenu.show() }
+        fun bind(post: Post ) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                postText.text = post.content
+                date.text = post.published
+                likeCount.text = formatEnds(post.likes)
+                shareCount.text = formatEnds(post.share)
+                likes.setImageResource(getLikeIconResId(post.likedByMe))
+                likes.setOnClickListener { interactionListener.onLikeClicked(post) }
+                share.setOnClickListener { interactionListener.onShareClicked(post) }
+                options.setOnClickListener { popupMenu.show() }
 
+            }
         }
 
         private fun formatEnds(shareCount: Int): String {
