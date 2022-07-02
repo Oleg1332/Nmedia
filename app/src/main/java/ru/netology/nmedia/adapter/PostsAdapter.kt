@@ -17,7 +17,6 @@ internal class PostsAdapter(
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostBinding.inflate(inflater, parent, false)
@@ -56,44 +55,41 @@ internal class PostsAdapter(
         }
 
         init {
-            binding.likes.setOnClickListener { listener.onLikeClicked(post) }
+            binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.share.setOnClickListener { listener.onShareClicked(post) }
-            //binding.options.setOnClickListener { popupMenu.show() }
+            binding.options.setOnClickListener { popupMenu.show() }
         }
 
-        fun bind(post: Post ) {
+        fun bind(post: Post) {
             this.post = post
             with(binding) {
                 authorName.text = post.author
                 postText.text = post.content
                 date.text = post.published
-                likeCount.text = formatEnds(post.likes)
-                shareCount.text = formatEnds(post.share)
-                likes.setImageResource(getLikeIconResId(post.likedByMe))
-                likes.setOnClickListener { interactionListener.onLikeClicked(post) }
-                share.setOnClickListener { interactionListener.onShareClicked(post) }
-                options.setOnClickListener { popupMenu.show() }
-
+                like.text = formatEnds(post.likes)
+                share.text = formatEnds(post.share)
+                like.isChecked = post.likedByMe
             }
         }
 
         private fun formatEnds(shareCount: Int): String {
-            if (shareCount >= 1000000) return String.format("%.2f M", (shareCount / 1000000).toFloat())
+            if (shareCount >= 1000000) return String.format(
+                "%.2f M",
+                (shareCount / 1000000).toFloat()
+            )
             if (shareCount >= 10000) return String.format("%d K", shareCount / 1000)
             if (shareCount >= 1000) return String.format("%.1f K", (shareCount / 1000).toFloat())
             return shareCount.toString()
         }
 
-        @DrawableRes
-        private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_like_red_24dp else R.drawable.ic_like_24dp
+
     }
 
-}
-private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post) =
-        oldItem.id == newItem.id
+    private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+            oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post) =
-        oldItem == newItem
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+            oldItem == newItem
+    }
 }
