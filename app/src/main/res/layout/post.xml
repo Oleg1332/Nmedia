@@ -51,8 +51,7 @@
         app:icon="@drawable/ic_options_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.AppTheme.IconButton"
-        />
+        style="@style/Widget.AppTheme.IconButton" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/headerBarrier"
