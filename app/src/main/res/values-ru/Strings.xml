@@ -13,4 +13,7 @@
     <string name="error_empty_content">Контент не может быть пустым</string>
     <string name="editing_post">Редактирование</string>
     <string name="cancel">отмена</string>
+    <string name="chooser_share_post">Поделиться постом</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="enter_url">Введите URL</string>
 </resources>

@@ -1,7 +1,7 @@
 package ru.netology.nmedia.impl
 
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
@@ -13,7 +13,8 @@ class InMemoryPostRepository : PostRepository {
                 content = "Some random content $index",
                 published = "10.06.2022",
                 likes = 999,
-                share = 999999
+                share = 999999,
+                video = "https://youtu.be/dQw4w9WgXcQ"
             )
         }
     )
