@@ -8,6 +8,7 @@ import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.impl.FilePostRepository
+import ru.netology.nmedia.impl.InMemoryPostRepository
 import ru.netology.nmedia.impl.SharedPrefsPostRepository
 
 
@@ -21,7 +22,8 @@ class PostViewModel(
 
     val videoPlayEvent = SingleLiveEvent<String>()
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
+    val separatePostViewEvent = SingleLiveEvent<Long>()
     private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClicked(content: String) {
@@ -64,6 +66,10 @@ class PostViewModel(
     override fun onVideoPlayClicked(post: Post) {
         currentPost.value = post
         videoPlayEvent.value = post.video
+    }
+    override fun onPostCardClicked(post: Post) {
+        currentPost.value = post
+        separatePostViewEvent.value = post.id
     }
     // endregion PostInteractionListener
 }

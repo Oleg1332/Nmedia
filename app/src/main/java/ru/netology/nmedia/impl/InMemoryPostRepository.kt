@@ -34,8 +34,6 @@ class InMemoryPostRepository : PostRepository {
 
     }
 
-
-
     override fun share(postId: Long) {
         data.value = posts.map {
             if (it.id != postId) it
@@ -53,6 +51,7 @@ class InMemoryPostRepository : PostRepository {
     override fun save(post: Post) {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
+
 
     private fun update(post: Post) {
         data.value = posts.map {

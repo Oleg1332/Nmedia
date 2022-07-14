@@ -11,7 +11,7 @@ import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostBinding
 
-internal class PostsAdapter(
+ class PostsAdapter(
     private val interactionListener: PostInteractionListener
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
 
@@ -27,7 +27,7 @@ internal class PostsAdapter(
     }
 
 
-    inner class ViewHolder(
+     class ViewHolder(
         private val binding: PostBinding,
         listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -61,6 +61,12 @@ internal class PostsAdapter(
         init {
             binding.videoContent.setOnClickListener { listener.onVideoPlayClicked(post)}
             binding.videoPlay.setOnClickListener { listener.onVideoPlayClicked(post)}
+        }
+        init {
+            binding.postText.setOnClickListener { listener.onPostCardClicked(post) }
+            binding.authorName.setOnClickListener { listener.onPostCardClicked(post) }
+            binding.date.setOnClickListener { listener.onPostCardClicked(post) }
+            binding.avatar.setOnClickListener { listener.onPostCardClicked(post) }
         }
 
         fun bind(post: Post) {

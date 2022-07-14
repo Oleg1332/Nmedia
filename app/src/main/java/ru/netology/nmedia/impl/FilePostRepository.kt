@@ -90,6 +90,7 @@ class FilePostRepository(
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
+
     private fun update(post: Post) {
         posts = posts.map {
             if (it.id == post.id) post else it
